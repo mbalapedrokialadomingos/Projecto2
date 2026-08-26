@@ -1,0 +1,14 @@
+.card{
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card h3{
+    margin-top: 0;
+}
+
+.card button{
+    padding: 10px 15px;
+    cursor: pointer;
+}
