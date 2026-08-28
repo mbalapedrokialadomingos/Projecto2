@@ -1,45 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Define a codificação e a responsividade da página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rede Academy</title>
+    <!-- Liga o ficheiro de estilos CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Cabeçalho da página com o nome e navegação -->
     <header>
         <h1>Rede Academy</h1>
         <nav>
-            
-            <a href=" #Inicio">Início</a>
+            <a href="#Inicio">Início</a>
             <a href="#Formacoes">Formações</a>
             <a href="#Servicos">Serviços</a>
             <a href="#Contacto">Contacto</a>
         </nav>
     </header>
+
+    <!-- Conteúdo principal da página -->
     <main>
-        <section id ="inicio">
-            <h2>Formação e Serviços em Redes</h2>
-            <p>Aprenda redes de computadores através da formação</p>
-            <button id="btnformacoes"> Ver Formações</button>
-        </section>
+        <!-- Secção inicial com apresentação da empresa -->
+        <section id="inicio">
+
+        <div class="hero-conteudo">
+
+            <p class="hero-tag">
+                REDE ACADEMY
+            </p>
+
+            <h2>
+                Aprenda Redes.<br>
+                Construa o seu Futuro.
+            </h2>
+
+            <p class="hero-descricao">
+                Formação e serviços profissionais em redes,
+                tecnologia e infraestrutura.
+            </p>
+
+            <button id="btnformacoes">
+                Ver Formações
+            </button>
+
+        </div>
+
+    </section>
+
+        <!-- Secção de formações -->
         <section id="formacoes">
-            <h2>Formações</h2>
-            <div id="listaformacoes"></div>
-            <div id="detalhesformacao"></div>
-        </section>
+    <h2>Formações</h2>
+
+    <div id="listaformacoes"></div>
+
+    <!-- Modal da formação -->
+    <div id="modalFormacao" class="modal">
+
+        <div class="modal-conteudo">
+
+            <button id="fecharModal" class="fechar-modal">
+                &times;
+            </button>
+
+            <div id="conteudoModal"></div>
+
+        </div>
+
+        </div>
+    </section>
+
+        <!-- Secção de serviços -->
         <section id="servicos">
             <h2>Serviços</h2>
             <div id="listaservicos"></div>
         </section>
-        <section>
-            <h2 id="contaco">Contactos</h2>
-            <p>Entre em Contacto para saber mais</p>
-        </section>
+
+        <!-- Secção de contacto -->
+        <section id="contacto">
+    <h2>Contactos</h2>
+    <p>Entre em contacto para saber mais</p>
+</section>
     </main>
+
+    <!-- Rodapé da página -->
     <footer>
         <p>(c) 2026 Rede Academy</p>
     </footer>
+
+    <!-- Carrega o JavaScript depois do HTML -->
     <script src="js/app.js"></script>
 </body>
 </html>
