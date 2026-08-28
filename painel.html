@@ -4,81 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="painel-page">
 
-    <h1>Painel Administrativo</h1>
-    <button id="btnLogout">Sair</button>
+    <div class="painel-shell">
+        <aside class="painel-sidebar">
+            <div class="brand-block">
+                <span class="brand-dot"></span>
+                <div>
+                    <p class="brand-label">Admin</p>
+                    <h2>Academia</h2>
+                </div>
+            </div>
 
-    <h2>Adicionar Formação</h2>
+            <nav class="painel-menu" aria-label="Menu do painel">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Formações</a>
+                <a href="#">Inscrições</a>
+                <a href="#">Configurações</a>
+            </nav>
+        </aside>
 
-<form id="formFormacao">
+        <main class="painel-main">
+            <header class="painel-header">
+                <div>
+                    <p class="eyebrow">Área administrativa</p>
+                    <h1>Painel Administrativo</h1>
+                </div>
+                <button id="btnLogout" class="btn btn-ghost" type="button">Sair</button>
+            </header>
 
-    <label for="nomeFormacao">Nome:</label>
-    <input
-        type="text"
-        id="nomeFormacao"
-        required
-    >
+            <section class="panel-card welcome-card">
+                <p class="welcome-text">Bem-vindo ao painel!</p>
+            </section>
 
-    <br><br>
+            <section class="panel-card">
+                <div class="section-header">
+                    <h2>Adicionar Formação</h2>
+                </div>
 
-    <label for="descricaoFormacao">Descrição:</label>
-    <textarea
-        id="descricaoFormacao"
-        required
-    ></textarea>
+                <form id="formFormacao" class="form-panel">
+                    <div class="campo">
+                        <label for="nomeFormacao">Nome</label>
+                        <input type="text" id="nomeFormacao" required>
+                    </div>
 
-    <br><br>
+                    <div class="campo">
+                        <label for="descricaoFormacao">Descrição</label>
+                        <textarea id="descricaoFormacao" rows="4" required></textarea>
+                    </div>
 
-    <label for="modalidadeFormacao">Modalidade:</label>
-    <select id="modalidadeFormacao" required>
-        <option value="">Selecione</option>
-        <option value="Online">Online</option>
-        <option value="Presencial">Presencial</option>
-    </select>
+                    <div class="grid-duas-colunas">
+                        <div class="campo">
+                            <label for="modalidadeFormacao">Modalidade</label>
+                            <select id="modalidadeFormacao" required>
+                                <option value="">Selecione</option>
+                                <option value="Online">Online</option>
+                                <option value="Presencial">Presencial</option>
+                            </select>
+                        </div>
 
-    <br><br>
+                        <div class="campo">
+                            <label for="precoFormacao">Preço</label>
+                            <input type="number" id="precoFormacao" min="0" step="0.01" required>
+                        </div>
+                    </div>
 
-    <label for="precoFormacao">Preço:</label>
-    <input
-        type="number"
-        id="precoFormacao"
-        required
-    >
+                    <button type="submit" class="btn btn-primary">Adicionar Formação</button>
+                </form>
 
-    <br><br>
+                <p id="mensagemFormacao" class="mensagem"></p>
+            </section>
 
-    <button type="submit">
-        Adicionar Formação
-    </button>
+            <section class="panel-card">
+                <div class="section-header">
+                    <h2>Inscrições</h2>
+                    <span class="badge">Ativas</span>
+                </div>
 
-</form>
-
-<p id="mensagemFormacao"></p>
-    <p>Bem-vindo ao painel!</p>
-
-    <h2>Inscrições</h2>
-
-<table border="1">
-
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Formação</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-
-    <tbody id="listaInscricoes">
-    </tbody>
-
-</table>
+                <div class="table-wrap">
+                    <table class="tabela-inscricoes">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Formação</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaInscricoes"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="js/painel.js"></script>
 

@@ -502,6 +502,369 @@ footer {
     }
 
 }
+
+/* =========================
+   LOGIN ADMINISTRATIVO
+========================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #dbeafe 0%, #eff6ff 30%, #f8fafc 100%);
+    padding: 24px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 28px;
+    padding: 32px 28px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.login-brand h1 {
+    font-size: clamp(1.7rem, 2vw, 2.2rem);
+    color: #0f172a;
+}
+
+.login-header {
+    margin-bottom: 22px;
+}
+
+.login-header h2 {
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.login-header p {
+    color: #475569;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.login-btn {
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* =========================
+   PAINEL ADMINISTRATIVO
+========================= */
+
+.painel-page {
+    background: linear-gradient(135deg, #eef4ff 0%, #f8fafc 100%);
+    min-height: 100vh;
+    color: #0f172a;
+    padding: 32px 20px;
+}
+
+.painel-shell {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.painel-sidebar {
+    background: #0f172a;
+    color: #f8fafc;
+    border-radius: 24px;
+    padding: 28px 22px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    position: sticky;
+    top: 20px;
+}
+
+.brand-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 34px;
+}
+
+.brand-dot {
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #38bdf8, #7c3aed);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.18);
+}
+
+.brand-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.brand-block h2 {
+    font-size: 1.4rem;
+    margin-top: 4px;
+}
+
+.painel-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.painel-menu a {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.painel-menu a:hover,
+.painel-menu a.active {
+    background: rgba(148, 163, 184, 0.12);
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.painel-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.painel-header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 22px;
+    padding: 22px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+.painel-header h1 {
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    color: #0f172a;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+}
+
+.btn-ghost {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.panel-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.05);
+}
+
+.welcome-card {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: #f8fafc;
+    padding: 20px 28px;
+}
+
+.welcome-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    color: #0f172a;
+}
+
+.badge {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.form-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.grid-duas-colunas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-weight: 700;
+    color: #334155;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 13px 14px;
+    font-size: 1rem;
+    color: #0f172a;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15);
+}
+
+.campo textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.mensagem {
+    margin-top: 16px;
+    min-height: 24px;
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.tabela-inscricoes {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+}
+
+.tabela-inscricoes th,
+.tabela-inscricoes td {
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabela-inscricoes thead th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.tabela-inscricoes tbody tr:hover {
+    background: #f8fbff;
+}
+
+@media (max-width: 900px) {
+    .painel-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-sidebar {
+        position: static;
+    }
+
+    .painel-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    .painel-page {
+        padding: 20px 14px;
+    }
+
+    .panel-card,
+    .painel-header {
+        padding: 20px 16px;
+    }
+
+    .grid-duas-colunas {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
 /* =========================
    MODAL DE FORMAÇÕES
 ========================= */

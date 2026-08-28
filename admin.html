@@ -4,33 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Área Administrativa</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="login-page">
 
-    <h1>Área Administrativa</h1>
+    <main class="login-container">
+        <section class="login-card">
+            <div class="login-brand">
+                <span class="brand-dot"></span>
+                <div>
+                    <p class="brand-label">Admin panel</p>
+                    <h1>Área Administrativa</h1>
+                </div>
+            </div>
 
-    <h2>Login</h2>
+            <div class="login-header">
+                <h2>Login</h2>
+                <p>Entre para gerir formações e inscrições.</p>
+            </div>
 
-    <form id="formLogin">
+            <form id="formLogin" class="login-form">
+                <div class="campo">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" placeholder="Digite o seu usuário" required>
+                </div>
 
-        <label for="usuario">Usuário:</label>
-        <input type="text" id="usuario" required>
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite a sua senha" required>
+                </div>
 
-        <br><br>
+                <button type="submit" class="btn btn-primary login-btn">Entrar</button>
+            </form>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" required>
-
-        <br><br>
-
-        <button type="submit">Entrar</button>
-
-    </form>
-
-    <p id="mensagemLogin"></p>
+            <p id="mensagemLogin" class="mensagem"></p>
+        </section>
+    </main>
 
     <script src="js/admin.js"></script>
 
