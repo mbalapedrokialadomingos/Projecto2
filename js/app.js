@@ -8,10 +8,272 @@ const fecharModal = document.getElementById("fecharModal");
 
 const btnformacoes = document.getElementById("btnformacoes");
 
+const btnLoginPrincipal = document.getElementById("btnLoginPrincipal");
 
-// =========================
-// BOTÃO VER FORMAÇÕES
-// =========================
+let utilizadorAtual = null;
+let formacaoSelecionada = null;
+
+async function verificarAutenticacao() {
+
+    try {
+
+        const resposta = await fetch("/perfil");
+
+        if (!resposta.ok) {
+            return null;
+        }
+
+        const dados = await resposta.json();
+
+        if (!dados.autenticado) {
+            utilizadorAtual = null;
+            return null;
+        }
+
+        utilizadorAtual = dados.utilizador;
+        return dados.utilizador;
+
+    } catch (erro) {
+
+        console.error("Erro ao verificar autenticação:", erro);
+        return null;
+
+    }
+}
+
+function abrirModal() {
+    modalFormacao.classList.add("ativo");
+}
+
+function fecharModalAtual() {
+    modalFormacao.classList.remove("ativo");
+}
+
+function mostrarFormularioInscricao(formacao) {
+    formacaoSelecionada = formacao.nome;
+
+    const nomePadrao = utilizadorAtual?.nome || "";
+    const emailPadrao = utilizadorAtual?.email || "";
+
+    conteudoModal.innerHTML = `
+        <div class="modal-formacao">
+            <h2>Inscrição: ${formacao.nome}</h2>
+
+            <form id="forminscricao" class="form-modal">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" value="${nomePadrao}" placeholder="Digite o seu nome" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" value="${emailPadrao}" placeholder="Digite o seu email" required>
+
+                <button type="submit">Enviar inscrição</button>
+                <div id="mensagemModal" class="mensagem-modal"></div>
+            </form>
+        </div>
+    `;
+
+    abrirModal();
+
+    const forminscricao = document.getElementById("forminscricao");
+
+    forminscricao.onsubmit = async function (event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mensagem = document.getElementById("mensagemModal");
+
+        try {
+            const resposta = await fetch("/inscricao", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    email: email,
+                    formacao: formacao.nome
+                })
+            });
+
+            const data = await resposta.json();
+            mensagem.textContent = data.mensagem;
+
+            if (resposta.ok) {
+                forminscricao.reset();
+            }
+
+        } catch (erro) {
+            console.error("Erro ao enviar inscrição:", erro);
+            mensagem.textContent = "Não foi possível enviar a inscrição.";
+        }
+    };
+}
+
+function mostrarModalAutenticacao(formacao = null) {
+    formacaoSelecionada = formacao ? formacao.nome : null;
+
+    const tituloAutenticacao = formacao
+        ? "Inscrever-me"
+        : "Entrar na minha conta";
+    const textoAutenticacao = formacao
+        ? `Para continuar a inscrição em <strong>${formacao.nome}</strong>, entra na tua conta ou cria uma nova.`
+        : "Entra na tua conta para consultar as tuas formações e inscrições.";
+
+    conteudoModal.innerHTML = `
+        <div class="modal-formacao auth-modal">
+            <h2>${tituloAutenticacao}</h2>
+            <p class="auth-texto">${textoAutenticacao}</p>
+
+            <div class="auth-toggle">
+                <button type="button" class="auth-tab active" data-tab="login">Entrar</button>
+                <button type="button" class="auth-tab" data-tab="registar">Criar conta</button>
+            </div>
+
+            <div class="auth-panel active" data-panel="login">
+                <form id="loginForm" class="auth-form">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Digite o seu email" required>
+
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Digite a sua password" required>
+
+                    <button type="submit">Entrar</button>
+                    <div id="mensagemAuthLogin" class="mensagem-modal"></div>
+                </form>
+            </div>
+
+            <div class="auth-panel" data-panel="registar">
+                <form id="registarForm" class="auth-form">
+                    <label for="registarNome">Nome</label>
+                    <input type="text" id="registarNome" placeholder="Digite o seu nome" required>
+
+                    <label for="registarEmail">Email</label>
+                    <input type="email" id="registarEmail" placeholder="Digite o seu email" required>
+
+                    <label for="registarPassword">Password</label>
+                    <input type="password" id="registarPassword" placeholder="Crie uma password" required>
+
+                    <button type="submit">Criar conta</button>
+                    <div id="mensagemAuthRegistar" class="mensagem-modal"></div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    abrirModal();
+
+    document.querySelectorAll(".auth-tab").forEach((botao) => {
+        botao.addEventListener("click", () => {
+            const tab = botao.dataset.tab;
+
+            document.querySelectorAll(".auth-tab").forEach((item) => {
+                item.classList.toggle("active", item === botao);
+            });
+
+            document.querySelectorAll(".auth-panel").forEach((painel) => {
+                painel.classList.toggle("active", painel.dataset.panel === tab);
+            });
+        });
+    });
+
+    const loginForm = document.getElementById("loginForm");
+    const registarForm = document.getElementById("registarForm");
+
+    loginForm.onsubmit = async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const mensagem = document.getElementById("mensagemAuthLogin");
+
+        try {
+            const resposta = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const dados = await resposta.json();
+            mensagem.textContent = dados.mensagem;
+
+            if (resposta.ok) {
+                utilizadorAtual = dados.utilizador;
+
+                if (formacao) {
+                    mostrarFormularioInscricao(formacao);
+                } else {
+                    window.location.href = "/aluno.html";
+                }
+            }
+
+        } catch (erro) {
+            console.error("Erro ao fazer login:", erro);
+            mensagem.textContent = "Não foi possível entrar.";
+        }
+    };
+
+    registarForm.onsubmit = async function (event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("registarNome").value.trim();
+        const email = document.getElementById("registarEmail").value.trim();
+        const password = document.getElementById("registarPassword").value;
+        const mensagem = document.getElementById("mensagemAuthRegistar");
+
+        try {
+            const resposta = await fetch("/registar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nome, email, password })
+            });
+
+            const dados = await resposta.json();
+            mensagem.textContent = dados.mensagem;
+
+            if (resposta.ok) {
+                const loginResposta = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const loginDados = await loginResposta.json();
+
+                if (loginResposta.ok) {
+                    utilizadorAtual = loginDados.utilizador;
+
+                    if (formacao) {
+                        mostrarFormularioInscricao(formacao);
+                    } else {
+                        window.location.href = "/aluno.html";
+                    }
+                }
+            }
+
+        } catch (erro) {
+            console.error("Erro ao criar conta:", erro);
+            mensagem.textContent = "Não foi possível criar a conta.";
+        }
+    };
+}
+
+btnLoginPrincipal.addEventListener("click", async () => {
+    const perfil = await verificarAutenticacao();
+
+    if (perfil) {
+        window.location.href = "/aluno.html";
+        return;
+    }
+
+    mostrarModalAutenticacao();
+});
 
 btnformacoes.addEventListener("click", () => {
 
@@ -144,150 +406,16 @@ async function carregarFormacoes() {
                     document.getElementById("btninscricao");
 
 
-                btninscricao.onclick = function () {
+                btninscricao.onclick = async function () {
 
-                    conteudoModal.innerHTML = `
+                    const perfil = await verificarAutenticacao();
 
-                        <div class="modal-formacao">
+                    if (perfil) {
+                        mostrarFormularioInscricao(formacao);
+                        return;
+                    }
 
-                            <h2>
-                                Inscrição:
-                                ${formacao.nome}
-                            </h2>
-
-
-                            <form
-                                id="forminscricao"
-                                class="form-modal"
-                            >
-
-                                <label for="nome">
-                                    Nome completo
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="nome"
-                                    placeholder="Digite o seu nome"
-                                    required
-                                >
-
-
-                                <label for="email">
-                                    Email
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="Digite o seu email"
-                                    required
-                                >
-
-
-                                <button type="submit">
-                                    Enviar inscrição
-                                </button>
-
-
-                                <div
-                                    id="mensagemModal"
-                                    class="mensagem-modal"
-                                ></div>
-
-                            </form>
-
-                        </div>
-
-                    `;
-
-
-                    // =========================
-                    // ENVIO DA INSCRIÇÃO
-                    // =========================
-
-                    const forminscricao =
-                        document.getElementById("forminscricao");
-
-
-                    forminscricao.onsubmit =
-                        async function (event) {
-
-                            event.preventDefault();
-
-
-                            const nome =
-                                document
-                                    .getElementById("nome")
-                                    .value;
-
-
-                            const email =
-                                document
-                                    .getElementById("email")
-                                    .value;
-
-
-                            const mensagem =
-                                document
-                                    .getElementById("mensagemModal");
-
-
-                            try {
-
-                                const resposta =
-                                    await fetch("/inscricao", {
-
-                                        method: "POST",
-
-                                        headers: {
-                                            "Content-Type":
-                                                "application/json"
-                                        },
-
-                                        body: JSON.stringify({
-
-                                            nome: nome,
-
-                                            email: email,
-
-                                            formacao:
-                                                formacao.nome
-
-                                        })
-
-                                    });
-
-
-                                const data =
-                                    await resposta.json();
-
-
-                                mensagem.textContent =
-                                    data.mensagem;
-
-
-                                if (resposta.ok) {
-
-                                    forminscricao.reset();
-
-                                }
-
-
-                            } catch (erro) {
-
-                                console.error(
-                                    "Erro:",
-                                    erro
-                                );
-
-
-                                mensagem.textContent =
-                                    "Não foi possível enviar a inscrição.";
-
-                            }
-
-                        };
+                    mostrarModalAutenticacao(formacao);
 
                 };
 
@@ -319,35 +447,21 @@ carregarFormacoes();
 // =========================
 
 fecharModal.onclick = function () {
-
-    modalFormacao.classList.remove("ativo");
-
+    fecharModalAtual();
 };
-
 
 // Fechar clicando fora do modal
-
 modalFormacao.onclick = function (event) {
-
     if (event.target === modalFormacao) {
-
-        modalFormacao.classList.remove("ativo");
-
+        fecharModalAtual();
     }
-
 };
 
-
 // Fechar com ESC
-
 document.addEventListener("keydown", function (event) {
-
     if (event.key === "Escape") {
-
-        modalFormacao.classList.remove("ativo");
-
+        fecharModalAtual();
     }
-
 });
 
 
@@ -425,3 +539,4 @@ async function carregarServicos() {
 
 
 carregarServicos();
+verificarAutenticacao();

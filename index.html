@@ -8,52 +8,164 @@
     <!-- Liga o ficheiro de estilos CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <!-- Cabeçalho da página com o nome e navegação -->
+<body class="home-page">
     <header>
-        <h1>Rede Academy</h1>
+        <a class="brand" href="#inicio" aria-label="Rede Academy - início">
+            <span class="brand-mark">RA</span>
+            <span>
+                <strong>Rede Academy</strong>
+                <small>Formação que liga futuros</small>
+            </span>
+        </a>
         <nav>
-            <a href="#Inicio">Início</a>
-            <a href="#Formacoes">Formações</a>
-            <a href="#Servicos">Serviços</a>
-            <a href="#Contacto">Contacto</a>
+            <a href="#inicio">Início</a>
+            <a href="#formacoes">Formações</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#contacto">Contacto</a>
+            <button id="btnLoginPrincipal" class="btn-login-principal" type="button">Entrar</button>
         </nav>
     </header>
 
-    <!-- Conteúdo principal da página -->
     <main>
-        <!-- Secção inicial com apresentação da empresa -->
         <section id="inicio">
+            <div class="hero-conteudo">
+                <p class="hero-tag">APRENDER. LIGAR. EVOLUIR.</p>
+                <h2>O próximo passo da tua carreira começa aqui.</h2>
+                <p class="hero-descricao">
+                    Formação prática em redes, tecnologia e infraestrutura para transformar curiosidade em capacidade real.
+                </p>
+                <div class="hero-acoes">
+                    <button id="btnformacoes">Explorar formações <span aria-hidden="true">&#8594;</span></button>
+                    <a class="hero-link" href="#servicos">Conhecer serviços</a>
+                </div>
+                <div class="hero-prova">
+                    <span class="avatar-stack" aria-hidden="true"><i>AM</i><i>JS</i><i>+</i></span>
+                    <span><strong>Aprendizagem com direção</strong><small>Conteúdo pensado para o mundo real</small></span>
+                </div>
+            </div>
 
-        <div class="hero-conteudo">
+            <div class="hero-visual" aria-label="Ilustração de uma rede de aprendizagem">
+                <div class="visual-label"><span></span> LABORATÓRIO ONLINE</div>
+                <div class="network-map">
+                    <span class="network-line line-one"></span>
+                    <span class="network-line line-two"></span>
+                    <span class="network-line line-three"></span>
+                    <span class="network-line line-four"></span>
+                    <span class="network-node node-main">RA</span>
+                    <span class="network-node node-one">01</span>
+                    <span class="network-node node-two">02</span>
+                    <span class="network-node node-three">03</span>
+                    <span class="network-node node-four">04</span>
+                </div>
+                <div class="visual-footer"><span>ROTA DE APRENDIZAGEM</span><strong>+ competências</strong></div>
+            </div>
+        </section>
 
-            <p class="hero-tag">
-                REDE ACADEMY
-            </p>
-
-            <h2>
-                Aprenda Redes.<br>
-                Construa o seu Futuro.
-            </h2>
-
-            <p class="hero-descricao">
-                Formação e serviços profissionais em redes,
-                tecnologia e infraestrutura.
-            </p>
-
-            <button id="btnformacoes">
-                Ver Formações
-            </button>
-
+        <div class="home-metrics" aria-label="Indicadores da Rede Academy">
+            <div><strong>100%</strong><span>foco prático</span></div>
+            <div><strong>3 áreas</strong><span>num só lugar</span></div>
+            <div><strong>1 objetivo</strong><span>o teu próximo nível</span></div>
         </div>
 
-    </section>
+        <section id="como-funciona" class="journey-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">O nosso método</p>
+                    <h2>Uma formação que te leva da curiosidade à capacidade.</h2>
+                </div>
+                <p>O conhecimento ganha força quando passa por várias etapas e termina em algo que consegues mostrar.</p>
+            </div>
 
-        <!-- Secção de formações -->
+            <div class="journey-steps">
+                <article><span>01</span><h3>Escolhe</h3><p>Encontra a formação certa para o teu próximo objetivo.</p></article>
+                <article><span>02</span><h3>Aprende</h3><p>Recebe orientação de quem conhece a realidade profissional.</p></article>
+                <article><span>03</span><h3>Pratica</h3><p>Transforma conceitos em exercícios, experiências e decisões.</p></article>
+                <article><span>04</span><h3>Constrói</h3><p>Desenvolve um projeto que prova o que já consegues fazer.</p></article>
+                <article><span>05</span><h3>Evolui</h3><p>Recolhe feedback, partilha o resultado e prepara o próximo passo.</p></article>
+            </div>
+        </section>
+
+        <section class="difference-section">
+            <div class="difference-intro">
+                <p class="section-kicker">A diferença está no percurso</p>
+                <h2>Mais do que aprender. Fazer.</h2>
+                <p>Não queremos apenas ensinar conteúdos. Queremos ajudar-te a desenvolver competências e construir algo real.</p>
+            </div>
+            <div class="difference-grid">
+                <article><span class="feature-number">01</span><h3>Aprendizagem prática</h3><p>Aprende fazendo, com atividades que aproximam o estudo dos desafios reais.</p></article>
+                <article><span class="feature-number">02</span><h3>Formações ao vivo</h3><p>Participa em sessões interativas, webinars e workshops com acompanhamento.</p></article>
+                <article><span class="feature-number">03</span><h3>Feedback que orienta</h3><p>Percebe o que já dominas e quais são os próximos pontos a melhorar.</p></article>
+                <article><span class="feature-number">04</span><h3>Competências reais</h3><p>Termina cada etapa com mais confiança para resolver problemas concretos.</p></article>
+            </div>
+        </section>
+
+        <section class="formats-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Aprende no formato certo</p>
+                    <h2>Conhecimento com ritmo, contexto e interação.</h2>
+                </div>
+                <p>Escolhe a experiência que melhor combina contigo. A aprendizagem pode acontecer em diferentes momentos e formatos.</p>
+            </div>
+            <div class="formats-grid">
+                <article><span>01</span><h3>Webinars</h3><p>Sessões curtas e focadas em temas relevantes.</p></article>
+                <article><span>02</span><h3>Workshops</h3><p>Aprendizagem prática, guiada e interativa.</p></article>
+                <article><span>03</span><h3>Formações ao vivo</h3><p>Programas completos com acompanhamento de formadores.</p></article>
+                <article><span>04</span><h3>Aprendizagem online</h3><p>Estuda de qualquer lugar e mantém o teu ritmo.</p></article>
+            </div>
+        </section>
+
+        <section class="practice-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Do conceito ao resultado</p>
+                    <h2>Aprende fazendo.</h2>
+                </div>
+                <p>Cada área pode abrir caminho para uma criação concreta, uma solução ou um projeto que demonstra a tua evolução.</p>
+            </div>
+            <div class="practice-list">
+                <div><strong>Programação</strong><span>Desenvolver aplicações</span></div>
+                <div><strong>Redes</strong><span>Criar laboratórios</span></div>
+                <div><strong>Data &amp; IA</strong><span>Criar projetos com dados</span></div>
+                <div><strong>Web Development</strong><span>Publicar websites</span></div>
+                <div><strong>Cybersecurity</strong><span>Resolver desafios</span></div>
+            </div>
+        </section>
+
+        <section class="challenge-section">
+            <div class="challenge-copy">
+                <p class="section-kicker">Em breve na plataforma</p>
+                <h2>Desafie o seu conhecimento.</h2>
+                <p>Os desafios foram pensados para colocar os conhecimentos em prática, incentivar a criatividade e dar espaço para reconhecer boas soluções.</p>
+            </div>
+            <div class="challenge-ticket">
+                <span class="ticket-label">DESAFIO EM DESTAQUE</span>
+                <strong>NOVOS DESAFIOS<br>A CAMINHO</strong>
+                <span class="ticket-status">A preparar</span>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
+            <div class="portfolio-copy">
+                <p class="section-kicker">O resultado fica contigo</p>
+                <h2>Aprende uma competência. Constrói algo com ela.</h2>
+                <p>O conhecimento ganha valor quando é aplicado. A nossa visão é ajudar-te a demonstrar as tuas competências através de projetos e resultados.</p>
+            </div>
+            <div class="portfolio-flow" aria-label="Percurso para construir um portfólio">
+                <span>Aprende</span><b>&#8594;</b><span>Cria</span><b>&#8594;</b><span>Partilha</span><b>&#8594;</b><strong>Portfólio</strong>
+            </div>
+        </section>
+
         <section id="formacoes">
-    <h2>Formações</h2>
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Escolhe o teu caminho</p>
+                    <h2>Formações para sair do plano e ir para a prática.</h2>
+                </div>
+                <p>Aprende com clareza, aplica com confiança e constrói uma base que acompanha o teu crescimento.</p>
+            </div>
 
-    <div id="listaformacoes"></div>
+            <div id="listaformacoes"></div>
 
     <!-- Modal da formação -->
     <div id="modalFormacao" class="modal">
@@ -71,22 +183,54 @@
         </div>
     </section>
 
-        <!-- Secção de serviços -->
         <section id="servicos">
-            <h2>Serviços</h2>
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Além da formação</p>
+                    <h2>Experiência técnica para projetos que precisam de avançar.</h2>
+                </div>
+                <p>Da orientação à execução, encontra apoio para tornar a tecnologia mais simples e mais útil.</p>
+            </div>
             <div id="listaservicos"></div>
         </section>
 
-        <!-- Secção de contacto -->
+        <section class="community-section">
+            <div class="community-orbit" aria-hidden="true"><span>ALUNOS</span><span>FORMADORES</span><span>MENTORES</span><span>ESPECIALISTAS</span></div>
+            <div class="community-copy">
+                <p class="section-kicker">Uma visão coletiva</p>
+                <h2>Aprende, conecta-te e cresce com uma comunidade.</h2>
+                <p>Queremos aproximar alunos, formadores, mentores e especialistas para criar mais partilha, colaboração e oportunidades.</p>
+                <a class="hero-link" href="#contacto">Saber mais</a>
+            </div>
+        </section>
+
         <section id="contacto">
-    <h2>Contactos</h2>
-    <p>Entre em contacto para saber mais</p>
-</section>
+            <div class="contacto-inner">
+                <div>
+                    <p class="section-kicker">Vamos conversar</p>
+                    <h2>O teu próximo passo pode começar numa mensagem.</h2>
+                </div>
+                <div class="contacto-dados">
+                    <p>Entre em contacto para saber mais sobre formações, serviços e oportunidades de aprendizagem.</p>
+                    <a href="tel:+244924846386">+244 924 846 386</a>
+                    <a href="tel:+244959696854">+244 959 696 854</a>
+                    <a href="mailto:mbalapedrokialadomingos4@gmail.com">mbalapedrokialadomingos4@gmail.com</a>
+                    <span>Luanda, Angola</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <p class="section-kicker">O próximo projeto começa agora</p>
+            <h2>Pronto para desenvolver novas competências?</h2>
+            <a class="btn-cta-final" href="#formacoes">Explorar formações <span aria-hidden="true">&#8594;</span></a>
+        </section>
     </main>
 
     <!-- Rodapé da página -->
     <footer>
-        <p>(c) 2026 Rede Academy</p>
+        <p><strong>Rede Academy</strong> <span>(c) 2026</span></p>
+        <p>Formação que liga futuros.</p>
     </footer>
 
     <!-- Carrega o JavaScript depois do HTML -->

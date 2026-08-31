@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Aluno</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="aluno-page">
+    <main class="aluno-shell">
+        <section class="aluno-card">
+            <div class="aluno-header">
+                <p class="eyebrow">Área do aluno</p>
+                <h1>Olá, <span id="nomeAluno">Aluno</span></h1>
+            </div>
+
+            <div class="aluno-actions">
+                <a href="/" class="btn btn-primary">Voltar ao site</a>
+                <button id="btnLogoutAluno" class="btn btn-ghost" type="button">Sair</button>
+            </div>
+
+            <div class="panel-card aluno-panel">
+                <div class="section-header">
+                    <h2>Minhas formações</h2>
+                </div>
+
+                <div id="listaMinhasInscricoes" class="lista-aluno"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/aluno.js"></script>
+</body>
+</html>
