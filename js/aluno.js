@@ -1,7 +1,10 @@
+// Script da área do aluno.
+// Carrega o perfil autenticado e mostra as inscrições do utilizador atual.
 const nomeAluno = document.getElementById("nomeAluno");
 const listaMinhasInscricoes = document.getElementById("listaMinhasInscricoes");
 const btnLogoutAluno = document.getElementById("btnLogoutAluno");
 
+// Busca o perfil do aluno autenticado e valida se a sessão ainda está ativa.
 async function carregarPerfilAluno() {
     try {
         const resposta = await fetch("/perfil");
@@ -26,6 +29,7 @@ async function carregarPerfilAluno() {
     }
 }
 
+// Lista as inscrições do aluno com o respetivo estado e pagamento.
 async function carregarInscricoesAluno() {
     try {
         const resposta = await fetch("/minhas-inscricoes");
@@ -64,6 +68,7 @@ async function carregarInscricoesAluno() {
     }
 }
 
+// Termina a sessão do aluno e volta para a página inicial.
 btnLogoutAluno.addEventListener("click", async () => {
     try {
         await fetch("/logout", { method: "POST" });

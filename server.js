@@ -1,12 +1,17 @@
+// Servidor HTTP principal da aplicação.
+// Responsável por servir a interface web, autenticar utilizadores e gerir
+// as operações de inscrições, formações e administração.
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-const { Client } = require ("pg");
 
 const db = require("./db/database");
 const bcrypt = require("bcrypt");
+
+// Guarda todas as sessões ativas do navegador em memória.
 const sessoes = new Map();
 
+// Lê o cookie de sessão enviado pelo navegador e devolve o identificador.
 function obterSessao(req) {
 
     const cookies = req.headers.cookie;
@@ -29,6 +34,7 @@ function obterSessao(req) {
     return null;
 }
 
+// Verifica se a sessão atual pertence a um administrador.
 function sessaoEAdmin(req) {
     const sessionId = obterSessao(req);
     const sessao = sessionId ? sessoes.get(sessionId) : null;
@@ -36,8 +42,12 @@ function sessaoEAdmin(req) {
     return Boolean(sessao && sessao.tipo === "admin");
 }
 
+// Configuração principal do servidor: todas as rotas da aplicação passam por aqui.
 const server = http.createServer((req, res) => {
-    if (req.method === "POST" && req.url === "/inscricao") {
+    // =========================
+// INSCRIÇÃO DOS UTILIZADORES
+// =========================
+if (req.method === "POST" && req.url === "/inscricao") {
 
     let dados = "";
 
@@ -132,6 +142,9 @@ const server = http.createServer((req, res) => {
     return;
 
 }
+// =========================
+// GESTÃO DE INSCRIÇÕES
+// =========================
 if (req.method === "PATCH" && req.url.startsWith("/inscricoes/")) {
 
     if (!sessaoEAdmin(req)) {
@@ -211,6 +224,7 @@ if (req.method === "PATCH" && req.url.startsWith("/inscricoes/")) {
     return;
 }
 
+// Lista todas as inscrições para o painel administrativo.
 if (req.method === "GET" && req.url === "/inscricoes") {
 
     if (!sessaoEAdmin(req)) {
@@ -249,7 +263,11 @@ if (req.method === "GET" && req.url === "/inscricoes") {
 
     return;
 }
-        if (req.method === "POST" && req.url === "/login") {
+// =========================
+// AUTENTICAÇÃO
+// =========================
+// Login de administrador e de utilizador comum.
+if (req.method === "POST" && req.url === "/login") {
 
     let dados = "";
 
@@ -403,6 +421,7 @@ if (req.method === "GET" && req.url === "/inscricoes") {
     return;
 }
 
+// Redireciona apenas para o painel administrativo quando o utilizador é admin.
 if (req.method === "GET" && req.url === "/painel.html") {
 
     const sessionId = obterSessao(req);
@@ -442,6 +461,7 @@ if (req.method === "GET" && req.url === "/painel.html") {
     return;
 }
 
+// Fecha a sessão ativa e remove o cookie do navegador.
 if (req.method === "POST" && req.url === "/logout") {
 
     const sessionId = obterSessao(req);
@@ -462,6 +482,7 @@ if (req.method === "POST" && req.url === "/logout") {
     return;
 }
 
+// Devolve o perfil do utilizador autenticado para o frontend.
 if (req.method === "GET" && req.url === "/perfil") {
 
     const sessionId = obterSessao(req);
@@ -545,6 +566,7 @@ if (req.method === "GET" && req.url === "/perfil") {
     return;
 }
 
+// Obtém as inscrições do aluno autenticado.
 if (req.method === "GET" && req.url === "/minhas-inscricoes") {
 
     const sessionId = obterSessao(req);
@@ -616,6 +638,7 @@ if (req.method === "GET" && req.url === "/minhas-inscricoes") {
     return;
 }
 
+// Permite o acesso à página do aluno apenas com sessão válida.
 if (req.method === "GET" && req.url === "/aluno.html") {
 
     const sessionId = obterSessao(req);
@@ -649,6 +672,7 @@ if (req.method === "GET" && req.url === "/aluno.html") {
     return;
 }
 
+// Regista um novo utilizador com password cifrada.
 if (req.method === "POST" && req.url === "/registar") {
 
     let dados = "";
@@ -766,6 +790,9 @@ if (req.method === "POST" && req.url === "/registar") {
     return;
 }
 
+// =========================
+// GESTÃO DE FORMAÇÕES
+// =========================
 if (req.method === "POST" && req.url === "/formacoes") {
 
     if (!sessaoEAdmin(req)) {
@@ -856,6 +883,7 @@ if (req.method === "POST" && req.url === "/formacoes") {
     return;
 }
 
+// Atualiza ou remove uma formação específica pelo id.
 if ((req.method === "PUT" || req.method === "DELETE") && req.url.startsWith("/formacoes/")) {
 
     if (!sessaoEAdmin(req)) {
@@ -1005,6 +1033,7 @@ if ((req.method === "PUT" || req.method === "DELETE") && req.url.startsWith("/fo
 
     return;
 }
+// Lista os serviços disponíveis para a página inicial.
 if (req.method === "GET" && req.url === "/servicos") {
 
     db.query("SELECT * FROM servicos ORDER BY id ASC")
@@ -1039,6 +1068,7 @@ if (req.method === "GET" && req.url === "/servicos") {
     return;
 }
 
+// Lista as formações disponíveis para a página inicial e para o painel.
 if (req.method === "GET" && req.url === "/formacoes") {
 
     db.query("SELECT * FROM formacoes ORDER BY id ASC")
@@ -1070,12 +1100,18 @@ if (req.method === "GET" && req.url === "/formacoes") {
     return;
 }
 
-    let arquivo;
+// =========================
+// SERVIÇO DE FICHEIROS ESTÁTICOS
+// =========================
+// Serve os ficheiros HTML, CSS, JavaScript e imagens da aplicação.
+let arquivo;
 
-    if (req.url === "/") {
+    const urlSolicitada = decodeURIComponent(req.url || "/");
+
+    if (urlSolicitada === "/") {
         arquivo = "index.html";
     } else {
-        arquivo = req.url.substring(1);
+        arquivo = urlSolicitada.substring(1);
     }
 
     const caminho = path.join(__dirname, arquivo);
@@ -1096,6 +1132,14 @@ if (req.method === "GET" && req.url === "/formacoes") {
             tipo = "text/css";
         } else if (arquivo.endsWith(".js")) {
             tipo = "text/javascript";
+        } else if (arquivo.endsWith(".png")) {
+            tipo = "image/png";
+        } else if (arquivo.endsWith(".jpg") || arquivo.endsWith(".jpeg")) {
+            tipo = "image/jpeg";
+        } else if (arquivo.endsWith(".svg")) {
+            tipo = "image/svg+xml";
+        } else if (arquivo.endsWith(".webp")) {
+            tipo = "image/webp";
         }
 
         res.writeHead(200, {

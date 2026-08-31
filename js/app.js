@@ -1,3 +1,5 @@
+// Script principal da página inicial.
+// Responsável por controlar o modal de autenticação, as formações e a inscrição do utilizador.
 const listaformacoes = document.getElementById("listaformacoes");
 
 const modalFormacao = document.getElementById("modalFormacao");
@@ -11,8 +13,8 @@ const btnformacoes = document.getElementById("btnformacoes");
 const btnLoginPrincipal = document.getElementById("btnLoginPrincipal");
 
 let utilizadorAtual = null;
-let formacaoSelecionada = null;
 
+// Verifica se existe uma sessão ativa do utilizador no servidor.
 async function verificarAutenticacao() {
 
     try {
@@ -41,17 +43,18 @@ async function verificarAutenticacao() {
     }
 }
 
+// Abre o modal principal da aplicação.
 function abrirModal() {
     modalFormacao.classList.add("ativo");
 }
 
+// Fecha o modal principal da aplicação.
 function fecharModalAtual() {
     modalFormacao.classList.remove("ativo");
 }
 
+// Cria o formulário de inscrição para uma formação específica.
 function mostrarFormularioInscricao(formacao) {
-    formacaoSelecionada = formacao.nome;
-
     const nomePadrao = utilizadorAtual?.nome || "";
     const emailPadrao = utilizadorAtual?.email || "";
 
@@ -110,9 +113,8 @@ function mostrarFormularioInscricao(formacao) {
     };
 }
 
+// Mostra o modal de autenticação com a opção de login ou criação de conta.
 function mostrarModalAutenticacao(formacao = null) {
-    formacaoSelecionada = formacao ? formacao.nome : null;
-
     const tituloAutenticacao = formacao
         ? "Inscrever-me"
         : "Entrar na minha conta";
@@ -264,6 +266,7 @@ function mostrarModalAutenticacao(formacao = null) {
     };
 }
 
+// Botão principal do menu: redireciona para a área do aluno se já estiver autenticado.
 btnLoginPrincipal.addEventListener("click", async () => {
     const perfil = await verificarAutenticacao();
 
@@ -288,6 +291,7 @@ btnformacoes.addEventListener("click", () => {
 // =========================
 // CARREGAR FORMAÇÕES
 // =========================
+// Busca as formações disponíveis no servidor e desenha os cartões na página principal.
 
 async function carregarFormacoes() {
 

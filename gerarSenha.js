@@ -1,3 +1,5 @@
+// Script auxiliar para gerar hashes de senha com bcrypt.
+// Serve para criar rapidamente uma password segura para o admin ou outros utilizadores.
 const bcrypt = require("bcrypt");
 
 const senha = "12345678";

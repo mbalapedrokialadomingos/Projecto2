@@ -1,3 +1,5 @@
+// Script do painel administrativo.
+// Responsável pela gestão das formações, edição e aprovação das inscrições.
 const listaInscricoes = document.getElementById("listaInscricoes");
 const listaFormacoesAdmin = document.getElementById("listaFormacoesAdmin");
 const pesquisaFormacoes = document.getElementById("pesquisaFormacoes");
@@ -10,6 +12,7 @@ const contadorInscricoes = document.getElementById("contadorInscricoes");
 let formacoesAdmin = [];
 let formacaoEmEdicao = null;
 
+// Escapa conteúdo HTML para evitar a injeção de tags no texto exibido.
 function escaparHtml(valor) {
     return String(valor)
         .replaceAll("&", "&amp;")
@@ -19,6 +22,7 @@ function escaparHtml(valor) {
         .replaceAll("'", "&#039;");
 }
 
+// Limpa o formulário para o modo de criação de nova formação.
 function limparFormularioFormacao() {
     formFormacao.reset();
     formacaoEmEdicao = null;
@@ -27,6 +31,7 @@ function limparFormularioFormacao() {
     btnCancelarEdicao.hidden = true;
 }
 
+// Preenche o formulário com os dados da formação escolhida para edição.
 function iniciarEdicao(formacao) {
     formacaoEmEdicao = formacao.id;
     document.getElementById("nomeFormacao").value = formacao.nome;
@@ -39,6 +44,7 @@ function iniciarEdicao(formacao) {
     document.getElementById("formFormacao").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+// Renderiza a lista de formações com filtro por pesquisa.
 function renderizarFormacoesAdmin() {
     const termo = pesquisaFormacoes.value.trim().toLowerCase();
     const formacoesFiltradas = formacoesAdmin.filter((formacao) =>
@@ -80,6 +86,7 @@ function renderizarFormacoesAdmin() {
     });
 }
 
+// Atualiza o estado de uma inscrição usando o seletor do painel.
 async function atualizarEstadoInscricao(id, estado, seletor) {
     seletor.disabled = true;
 
@@ -109,6 +116,7 @@ async function atualizarEstadoInscricao(id, estado, seletor) {
     }
 }
 
+// Busca as formações disponíveis para apresentar no painel administrativo.
 async function carregarFormacoesAdmin() {
     try {
         const resposta = await fetch("/formacoes");
@@ -125,6 +133,7 @@ async function carregarFormacoesAdmin() {
     }
 }
 
+// Remove uma formação após confirmação do administrador.
 async function removerFormacao(id) {
     const formacao = formacoesAdmin.find((item) => item.id === id);
 
@@ -150,6 +159,7 @@ async function removerFormacao(id) {
     }
 }
 
+// Carrega a tabela de inscrições e mostra o estado atual de cada candidato.
 async function carregarInscricoes() {
 
     try {

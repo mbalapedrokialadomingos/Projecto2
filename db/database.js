@@ -1,5 +1,8 @@
 const { Client } = require("pg");
 
+// Cria a ligação ao PostgreSQL usando as credenciais locais do projeto.
+// Esta instância será reutilizada por todas as rotas do servidor para
+// consultar e guardar dados relacionadas com formações, inscrições e utilizadores.
 const db = new Client({
     user: "postgres",
     host: "localhost",
@@ -8,6 +11,7 @@ const db = new Client({
     port: 5432
 });
 
+// Tenta abrir a ligação imediatamente ao iniciar a aplicação.
 db.connect()
     .then(() => {
         console.log("Conexão com o banco de dados estabelecida com sucesso!");
